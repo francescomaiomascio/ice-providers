@@ -4,9 +4,9 @@ import os
 from typing import Any, List, Sequence, Optional
 
 try:
-    import openai
-except ImportError:  # pragma: no cover
-    openai = None
+    from openai import OpenAI
+except ImportError:
+    OpenAI = None
 
 from ice_providers.embeddings.model import EmbeddingModel, EmbeddingResult
 from ice_providers.embeddings.base import normalize_texts
@@ -14,32 +14,34 @@ from ice_providers.embeddings.base import normalize_texts
 
 class OpenAIEmbeddingModel(EmbeddingModel):
     """
-    Embedding provider basato sull'API ufficiale OpenAI.
+    Provider embedding via API OpenAI ufficiale.
     """
 
     def __init__(
         self,
         *,
-        default_model: str,
+        default_model: Optional[str] = None,
         api_key: Optional[str] = None,
         base_url: Optional[str] = None,
         organization: Optional[str] = None,
     ) -> None:
-        if openai is None:
-            raise RuntimeError(
-                "Dipendenza mancante: installa 'openai' per usare OpenAIEmbeddingModel."
-            )
+        if OpenAI is None:
+            raise RuntimeError("Installare `openai>=1.0.0`")
 
         api_key = api_key or os.getenv("OPENAI_API_KEY")
         if not api_key:
-            raise RuntimeError("OPENAI_API_KEY non impostata.")
+            raise RuntimeError("OPENAI_API_KEY non impostata")
 
-        self._client = openai.OpenAI(
+        self._client = OpenAI(
             api_key=api_key,
             base_url=base_url,
             organization=organization,
         )
-        self._default_model = default_model
+
+        self._default_model = default_model or os.getenv(
+            "OPENAI_EMBEDDINGS_MODEL",
+            "text-embedding-3-large",
+        )
 
     def encode(
         self,
@@ -54,21 +56,21 @@ class OpenAIEmbeddingModel(EmbeddingModel):
 
         model_name = model or self._default_model
 
-        response = self._client.embeddings.create(
+        resp = self._client.embeddings.create(
             model=model_name,
             input=texts,
             **kwargs,
         )
 
-        usage = getattr(response, "usage", {}) or {}
+        usage = getattr(resp, "usage", {}) or {}
         results: List[EmbeddingResult] = []
 
-        for item in response.data:
-            vector = list(item.embedding)
+        for item in resp.data:
+            vec = list(item.embedding)
             results.append(
                 EmbeddingResult(
-                    vector=vector,
-                    dim=len(vector),
+                    vector=vec,
+                    dim=len(vec),
                     model=model_name,
                     raw=item,
                     usage=usage,
