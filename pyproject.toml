@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ice-providers"
+version = "0.1.0"
+description = "Provider implementations for ICE Engine (LLM, Embeddings, external backends)"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+    { name = "Francesco Maiomascio" }
+]
+requires-python = ">=3.10"
+
+dependencies = [
+    "ice-engine>=0.1.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/francescomaiomascio/ice-providers"
+Repository = "https://github.com/francescomaiomascio/ice-providers"
+Issues = "https://github.com/francescomaiomascio/ice-providers/issues"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
