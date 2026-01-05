@@ -1,106 +1,87 @@
-# ice-providers
+# ICE Providers
 
-**ice-providers** contains concrete provider implementations for the ICE ecosystem.
+[![ICE Ecosystem](https://img.shields.io/badge/ICE-Ecosystem-8FB9FF?style=flat)](#)
+[![Docs](https://img.shields.io/badge/docs-ICE--Docs-8FB9FF?style=flat)](https://github.com/francescomaiomascio/ice-docs)
+[![Status](https://img.shields.io/badge/status-active--development-6B7280?style=flat)](#)
+[![Language](https://img.shields.io/badge/python-3.x-111827?style=flat)](#)
+[![License](https://img.shields.io/badge/license-MIT-7A7CFF?style=flat)](#)
 
-This repository hosts *infrastructure-level integrations* such as:
-- Embedding providers (OpenAI, Ollama, GGUF, llama.cpp, etc.)
-- LLM backends
-- External inference or model-serving adapters
+ICE Providers defines the **integration layer** between the ICE ecosystem and
+external model or service providers.
 
-It does **not** contain orchestration logic, runtime lifecycle management, or cognitive behavior.
+It offers a unified and extensible abstraction for embeddings and model-backed
+capabilities, allowing ICE systems to switch providers without changing
+core logic.
 
----
-
-## Architecture Position
-
-`ice-providers` sits **outside** the ICE core domains.
-
-High-level architecture:
-
-Runtime
-↓
-Engine (contracts, orchestration, semantics)
-↓
-Providers (this repository)
-
-
-### Key principles
-
-- **ICE Engine defines the interfaces**
-- **Providers only implement those interfaces**
-- **Runtime never talks to providers directly**
-- Providers are *replaceable, optional, and external*
+ICE Providers does not implement intelligence.
+It standardizes **how external capabilities are accessed and consumed**.
 
 ---
 
-## What belongs here
+## Core Responsibilities
 
-✅ Concrete provider implementations  
-✅ External backends and services  
-✅ Infrastructure-specific logic  
+ICE Providers is responsible for:
 
-Examples:
-- OpenAI embeddings
-- Ollama local inference
-- GGUF / llama.cpp loaders
-- Mock providers for testing
-
----
-
-## What does NOT belong here
-
-❌ Orchestrator  
-❌ Runtime lifecycle  
-❌ Session management  
-❌ Cognitive logic  
-❌ Agent reasoning  
-❌ Business rules  
-
-Those live in other ICE repositories.
+- Defining base interfaces for external providers
+- Integrating local and remote embedding backends
+- Supporting multiple provider implementations behind a common contract
+- Isolating ICE systems from vendor-specific APIs
+- Enabling provider substitution and testing
+- Acting as the boundary between ICE and third-party services
 
 ---
 
-## Repository structure (example)
+## Integration Scope
 
-```
-ice_providers/
-└── embeddings/
-├── openai/
-│ └── provider.py
-├── ollama/
-│ └── provider.py
-├── llamacpp/
-│ └── provider.py
-└── mock/
-└── provider.py
-```
+ICE Providers operates at the **adapter layer**.
 
+It does not:
+- perform reasoning or planning
+- manage system lifecycle
+- store knowledge or memory
+- define agent behavior
 
-Each provider implements an interface defined in `ice-engine`.
+It does:
+- normalize provider interactions
+- encapsulate vendor-specific logic
+- expose consistent embedding interfaces
+- support local-first and remote-first strategies
+
+---
+
+## Design Principles
+
+- Provider-agnostic interfaces
+- Explicit contracts over implicit behavior
+- Local-first support when possible
+- Testability through mock providers
+- Minimal assumptions about execution context
+- Easy extensibility for new backends
 
 ---
 
 ## Usage
 
-Providers are discovered and wired by **ICE Engine**, not manually instantiated here.
+ICE Providers is not used directly by end users.
 
-This repository can be used:
-- as a dependency of ICE Engine
-- as a reference for building custom providers
-- as a public catalog of supported backends
+It is consumed by:
+- ICE AI
+- ICE Conscious
+- ICE Runtime
+- Other ICE components requiring external capabilities
+
+Providers can be swapped or extended without impacting upstream systems.
 
 ---
 
 ## Status
 
-This repository is **intentionally minimal** and **intentionally boring**.
-
-All complexity lives in:
-- ICE Engine (contracts and orchestration)
-- ICE Runtime (execution and lifecycle)
+This project is under **active development**.
+Provider implementations may expand as supported backends grow.
 
 ---
 
 ## License
 
-MIT
+This project is licensed under the terms of the MIT license.
+See the `LICENSE` file for details.
