@@ -1,87 +1,199 @@
 # ICE Providers
+## External Capability Integration Layer of the ICE Ecosystem
 
-[![ICE Ecosystem](https://img.shields.io/badge/ICE-Ecosystem-8FB9FF?style=flat)](#)
-[![Docs](https://img.shields.io/badge/docs-ICE--Docs-8FB9FF?style=flat)](https://github.com/francescomaiomascio/ice-docs)
-[![Status](https://img.shields.io/badge/status-active--development-6B7280?style=flat)](#)
-[![Language](https://img.shields.io/badge/python-3.x-111827?style=flat)](#)
-[![License](https://img.shields.io/badge/license-MIT-7A7CFF?style=flat)](#)
+ICE Providers defines the **integration boundary** between the ICE ecosystem
+and **external models, services, and computational capabilities**.
 
-ICE Providers defines the **integration layer** between the ICE ecosystem and
-external model or service providers.
-
-It offers a unified and extensible abstraction for embeddings and model-backed
-capabilities, allowing ICE systems to switch providers without changing
-core logic.
+It establishes **how ICE systems access third-party capabilities**
+without inheriting their assumptions, authority, or volatility.
 
 ICE Providers does not implement intelligence.
-It standardizes **how external capabilities are accessed and consumed**.
+It does not execute decisions.
+It does not define behavior.
+
+It defines **how external power is consumed without surrendering control**.
 
 ---
 
-## Core Responsibilities
+## Foundation Dependency
 
-ICE Providers is responsible for:
+This project derives its assumptions and constraints from  
+**ICE Foundation v1.0.0**.
 
-- Defining base interfaces for external providers
-- Integrating local and remote embedding backends
-- Supporting multiple provider implementations behind a common contract
-- Isolating ICE systems from vendor-specific APIs
-- Enabling provider substitution and testing
-- Acting as the boundary between ICE and third-party services
+In particular, it is bound by:
+
+- Explicit Authority and Control Separation (Axiom A-002)
+- State as a Derived and Inspectable Artifact (Axiom A-003)
+- Governance (Invariant I-003)
+- Governable Cognitive Reconfiguration (Invariant I-004)
+
+External providers never become authorities.
 
 ---
 
-## Integration Scope
+## What ICE Providers Is
 
-ICE Providers operates at the **adapter layer**.
+ICE Providers is:
 
-It does not:
-- perform reasoning or planning
-- manage system lifecycle
-- store knowledge or memory
-- define agent behavior
+- a **capability adapter layer**
+- a **vendor-isolation boundary**
+- a **normalization surface for external services**
+- a **control point for third-party integration**
+- a **testable and swappable provider abstraction**
 
-It does:
-- normalize provider interactions
-- encapsulate vendor-specific logic
-- expose consistent embedding interfaces
-- support local-first and remote-first strategies
+It allows ICE systems to **use external capabilities**
+without being shaped by them.
+
+---
+
+## What ICE Providers Is Not
+
+ICE Providers is **not**:
+
+- an intelligence layer
+- a decision system
+- a learning framework
+- a model orchestrator
+- a provider SDK wrapper
+- a shortcut to execution
+
+Providers supply signals and capabilities.  
+They do not decide.  
+They do not authorize.  
+They do not execute.
+
+---
+
+## Architectural Role
+
+ICE Providers operates at the **external capability boundary**
+of the ICE ecosystem.
+
+It is consumed by:
+
+- ICE AI (reasoning support, embeddings, inference signals)
+- ICE Consciousness (memory and representation signals)
+- ICE Runtime and Engine (controlled access to external computation)
+
+No ICE component should integrate directly
+with third-party services outside this layer.
+
+---
+
+## Provider Scope
+
+ICE Providers defines:
+
+- canonical provider interfaces
+- capability contracts (e.g. embeddings, inference, tools)
+- lifecycle and resource boundaries
+- error and degradation semantics
+- isolation from vendor-specific APIs
+
+All provider interactions are:
+
+- explicit
+- inspectable
+- replaceable
+- authority-neutral
+
+Implicit dependency on external services is forbidden.
+
+---
+
+## Authority and Execution Separation
+
+ICE Providers does **not** grant authority.
+
+- A provider response does not justify action.
+- A model output does not authorize execution.
+- External intelligence does not override governance.
+
+All decisions derived from providers
+must pass through ICE AI, Runtime, and Engine layers
+under Foundation-defined invariants.
 
 ---
 
 ## Design Principles
 
-- Provider-agnostic interfaces
+- Provider-agnostic by default
+- No vendor lock-in
 - Explicit contracts over implicit behavior
-- Local-first support when possible
-- Testability through mock providers
-- Minimal assumptions about execution context
-- Easy extensibility for new backends
+- Local-first when possible
+- Deterministic wrapping of probabilistic systems
+- Testability via mock and offline providers
+- Failure and degradation as first-class conditions
+
+External systems are assumed to be:
+- unreliable
+- rate-limited
+- probabilistic
+- outside governance
+
+ICE Providers exists to contain that risk.
 
 ---
 
-## Usage
+## Versioning and Evolution
 
-ICE Providers is not used directly by end users.
+ICE Providers evolves conservatively.
 
-It is consumed by:
-- ICE AI
-- ICE Conscious
-- ICE Runtime
-- Other ICE components requiring external capabilities
+- Interfaces are stable and explicit
+- New providers are additive
+- Capability expansion is deliberate
+- Breaking changes are exceptional
 
-Providers can be swapped or extended without impacting upstream systems.
+Provider churn must never destabilize ICE systems.
+
+---
+
+## Repository Scope
+
+This repository contains:
+
+- provider interface definitions
+- adapter implementations
+- normalization logic
+- test and mock providers
+- capability contracts
+
+It explicitly does **not** contain:
+
+- business logic
+- decision systems
+- orchestration code
+- governance enforcement
+- runtime execution paths
+
+---
+
+## Canonical Status
+
+ICE Providers is **normative at the external integration boundary**.
+
+Any ICE-compliant system that consumes
+external models or services
+must do so through this layer.
+
+Bypassing this boundary
+invalidates ICE compliance.
 
 ---
 
 ## Status
 
-This project is under **active development**.
-Provider implementations may expand as supported backends grow.
+ICE Providers is under **active development**.
+
+Provider support will expand,
+but architectural constraints are considered permanent.
 
 ---
 
-## License
+## Notes
 
-This project is licensed under the terms of the MIT license.
-See the `LICENSE` file for details.
+External systems evolve fast.  
+Foundations do not.
+
+ICE Providers exists to ensure  
+**ICE remains sovereign in a world of changing providers**.
